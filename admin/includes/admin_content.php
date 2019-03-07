@@ -17,12 +17,28 @@
                         </ol>
 
                         <?php 
+                        /*
+                        $result_set = User::find_all_users();
 
-                        $sql = "SELECT * from users";
-                        $result = $database->query($sql);
-                        $user_found = mysqli_fetch_array($result);
+                        while($row = mysqli_fetch_array($result_set)) {
+                            echo $row['username'] ."<br>";
+                        }
 
-                        echo $user_found['first_name']." ".$user_found['last_name'];
+                        $found_user = User::find_user_by_id(2);
+
+                        echo $found_user['username'];
+                        */
+
+                        $user = new User();
+                        $user_info = User::find_user_by_id(2);
+
+                        $user->id = $user_info['id'];
+                        $user->username = $user_info['username'];
+                        $user->password = $user_info['password'];
+                        $user->first_name = $user_info['first_name'];
+                        $user->last_name = $user_info['last_name'];
+
+                        echo $user->id;
 
                         ?>
 
