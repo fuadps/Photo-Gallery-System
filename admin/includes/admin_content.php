@@ -17,28 +17,16 @@
                         </ol>
 
                         <?php 
-                        /*
-                        $result_set = User::find_all_users();
 
-                        while($row = mysqli_fetch_array($result_set)) {
-                            echo $row['username'] ."<br>";
+                        $users = User::find_all_users();
+
+                        foreach ($users as $user) {
+                            echo $user->first_name ."<br>";
                         }
 
-                        $found_user = User::find_user_by_id(2);
-
-                        echo $found_user['username'];
-                        */
-
-                        $user = new User();
                         $user_info = User::find_user_by_id(2);
 
-                        $user->id = $user_info['id'];
-                        $user->username = $user_info['username'];
-                        $user->password = $user_info['password'];
-                        $user->first_name = $user_info['first_name'];
-                        $user->last_name = $user_info['last_name'];
-
-                        echo $user->id;
+                        echo $user_info->username;
 
                         ?>
 
