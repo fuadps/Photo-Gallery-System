@@ -1,5 +1,9 @@
 <?php
 
+function redirect($location) {
+    header("Location: {$location}");
+}
+
 //this function find missing classes in file and included it.
 function classAutoLoader($class) {
     $class = strtolower($class);
