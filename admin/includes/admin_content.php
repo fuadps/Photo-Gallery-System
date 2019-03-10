@@ -24,7 +24,10 @@
                             echo $user->first_name ."<br>";
                         }
 
-                        $user_info = User::find_user_by_id(4);
+                        $user_info = User::find_user_by_id(7);
+                        $user_info->first_name = "Fes";
+                        $user_info->last_name = "La's";
+                        $user_info->update();
                         
                         //$user_info->delete();
 
@@ -33,7 +36,7 @@
 
                         // $new_user = new User();
 
-                        // $new_user->username = "dell";
+                        // $new_user->username = "ardell";
                         // $new_user->password = "123";
                         // $new_user->first_name = "ltop";
                         // $new_user->last_name = "pc";
