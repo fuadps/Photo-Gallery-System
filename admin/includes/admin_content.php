@@ -24,9 +24,26 @@
                             echo $user->first_name ."<br>";
                         }
 
-                        $user_info = User::find_user_by_id(2);
+                        $user_info = User::find_user_by_id(4);
+                        
+                        //$user_info->delete();
 
-                        echo $user_info->username;
+                        // $user_info->last_name = "solihin";
+                        // $user_info->update();
+
+                        // $new_user = new User();
+
+                        // $new_user->username = "dell";
+                        // $new_user->password = "123";
+                        // $new_user->first_name = "ltop";
+                        // $new_user->last_name = "pc";
+
+                        // $new_user->create();
+
+                        // $user_new = User::find_user_by_id($database->the_insert_id());
+
+                        // echo $user_new->id."<br>";
+                        // echo $user_new;
 
                         ?>
 
