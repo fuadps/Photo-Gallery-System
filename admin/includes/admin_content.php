@@ -18,25 +18,30 @@
 
                         <?php 
 
-                        $users = User::find_all_users();
+                        $photos = Photo::find_all();
 
-                        foreach ($users as $user) {
-                            echo $user->first_name ."<br>";
+                        foreach ($photos as $photo) {
+                            echo $photo->title ."<br>";
                         }
 
-                        $user_info = User::find_user_by_id(7);
-                        $user_info->first_name = "Fes";
-                        $user_info->last_name = "La's";
-                        $user_info->update();
+                        echo SITE_ROOT;
+                        echo INCLUDE_PATH;
+
+                        // $user_info = User::find_user_by_id(7);
+                        // $user_info->first_name = "Fes";
+                        // $user_info->last_name = "La's";
+                        // $user_info->update();
                         
                         //$user_info->delete();
 
-                        // $user_info->last_name = "solihin";
-                        // $user_info->update();
+                        // $photo = Photo::find_by_id(1);
+
+                        // $photo->title = "solihin";
+                        // $photo->update();
 
                         // $new_user = new User();
 
-                        // $new_user->username = "ardell";
+                        // $new_user->username = "asasasasa";
                         // $new_user->password = "123";
                         // $new_user->first_name = "ltop";
                         // $new_user->last_name = "pc";
