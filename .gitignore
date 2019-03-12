@@ -1,4 +1,1 @@
-admin\images\*.jpg
-admin\images\*.png
-admin\images\*.jpeg
-
+admin/images/*
