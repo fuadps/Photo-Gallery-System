@@ -2,7 +2,7 @@
 
 defined('DS') ? null : define('DS',DIRECTORY_SEPARATOR);
 
-define ('SITE_ROOT', DS. 'XAMPP'.DS.'htdocs'.DS.'gallery');
+define ('SITE_ROOT','D:\\'. DS. 'XAMPP'.DS.'htdocs'.DS.'gallery');
 define ('INCLUDE_PATH',SITE_ROOT.DS.'admin'.DS.'includes');
 
 require_once('functions.php');
