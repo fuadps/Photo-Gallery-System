@@ -19,7 +19,7 @@ class User extends Db_object {
 
     $sql = "SELECT * FROM ". self::$db_table ." WHERE username = '{$username}' AND password = '{$password}' LIMIT 1";
 
-    $result_array = self::find_query($sql);
+    $result_array = self::find_by_query($sql);
         
     return !empty($result_array) ? array_shift($result_array) : false;
 
