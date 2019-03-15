@@ -9,7 +9,7 @@ class Db_object {
 
     public static function find_by_id($user_id) {
         global $database;
-        $result_array = static::find_by_query("SELECT * FROM ". static::$db_table ." WHERE id =" .$user_id. " LIMIT 1");
+        $result_array = static::find_by_query("SELECT * FROM ". static::$db_table ." WHERE ". static::$id_field. " =" .$user_id. " LIMIT 1");
         
         return !empty($result_array) ? array_shift($result_array) : false;
     }
@@ -69,7 +69,7 @@ class Db_object {
                 VALUES('". implode("','",array_values($properties)) ."')";
 
         if ($database->query($sql)) {
-            $this->id = $database->the_insert_id();
+            $this->static::$id_field = $database->the_insert_id();
             return true;
         }
         else {
@@ -89,7 +89,7 @@ class Db_object {
         
         $sql = "UPDATE ". static::$db_table ." SET ".
                     implode(",", $properties_pair). " 
-                    WHERE id = {$this->id}";
+                    WHERE ". static::$id_field ." = {$this->{static::$id_field}}";
 
         $database->query($sql);
 
@@ -98,16 +98,15 @@ class Db_object {
 
     public function delete() {
         global $database;
-
-        $sql = "DELETE FROM ". static::$db_table ." WHERE id = {$database->escape_string($this->id)} LIMIT 1";
-
+        $sql = "DELETE FROM ". static::$db_table ." WHERE ". static::$id_field ." = {$database->escape_string($this->{static::$id_field})} LIMIT 1";
+echo $sql;
         $database->query($sql);
         
         return mysqli_affected_rows($database->connection) == 1 ? true : false;
     }
 
     public function save() {
-        return isset($this->id) ? $this->update() : $this->create();
+        return isset($this->{static::$id_field}) ? $this->update() : $this->create();
     }
 }
 
