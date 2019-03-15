@@ -2,6 +2,18 @@
 
 class Db_object {
 
+    public $errors = array();
+    public $upload_errors_array = array(
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    );
+
     public static function find_all() {
         $result_set = static::find_by_query("SELECT * FROM ". static::$db_table ." ");
         return $result_set;
@@ -69,7 +81,7 @@ class Db_object {
                 VALUES('". implode("','",array_values($properties)) ."')";
 
         if ($database->query($sql)) {
-            $this->static::$id_field = $database->the_insert_id();
+            $this->{static::$id_field} = $database->the_insert_id();
             return true;
         }
         else {
@@ -98,8 +110,9 @@ class Db_object {
 
     public function delete() {
         global $database;
+        
         $sql = "DELETE FROM ". static::$db_table ." WHERE ". static::$id_field ." = {$database->escape_string($this->{static::$id_field})} LIMIT 1";
-echo $sql;
+        
         $database->query($sql);
         
         return mysqli_affected_rows($database->connection) == 1 ? true : false;
