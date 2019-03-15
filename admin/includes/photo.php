@@ -4,6 +4,8 @@ class Photo extends Db_object {
 
     protected static $db_table = "photos";
     protected static $db_table_fields = array('photo_id','title','description','filename','type','size');
+    protected static $id_field = "photo_id";
+
 
     public $photo_id;
     public $title;
@@ -78,6 +80,16 @@ class Photo extends Db_object {
                 $this->errors[] = "The file directory probably does not have permission";
                 return false;
             }
+        }
+    }
+
+    public function delete_photo() {
+        if($this->delete()) {
+            $target_path = SITE_ROOT .DS. "admin" .DS. $this->picture_path();
+            return unlink($target_path) ? true : false;
+        }
+        else {
+            return false;
         }
     }
 
