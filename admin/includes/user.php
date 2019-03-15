@@ -4,6 +4,7 @@ class User extends Db_object {
 
     protected static $db_table = "users";
     protected static $db_table_fields = array('username','password','first_name','last_name');
+    protected static $id_field = "id";
 
     public $id;
     public $username;
