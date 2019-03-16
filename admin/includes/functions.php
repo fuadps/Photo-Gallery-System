@@ -7,7 +7,7 @@ function redirect($location) {
 //this function find missing classes in file and included it.
 function classAutoLoader($class) {
     $class = strtolower($class);
-    $the_path = "includes/{$class}.php";
+    $the_path = INCLUDE_PATH.DS.$class.".php";
 
     if (is_file($the_path) && !class_exists($class)) {
         include($the_path);

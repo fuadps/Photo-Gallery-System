@@ -1,4 +1,11 @@
 <?php include("includes/header.php"); ?>
+<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
+
+<?php 
+
+$comments = Comment::find_all();
+
+?>
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -20,17 +27,33 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Comments
-                        <small>Subheading</small>
+                        All Comments
                     </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-file"></i> Blank Page
-                        </li>
-                    </ol>
+                    <!-- <a href="add_user.php" class="btn btn-primary">Add User</a> -->
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Author</th>
+                                    <th>Body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($comments as $comment) : ?>
+                                <tr>
+                                    <td><?php echo $comment->comment_id ;?></td>
+                                    <td><?php echo $comment->author ;?>
+                                        <div class="action_links">
+                                            <a href="delete_comment.php?id=<?php echo $comment->comment_id ?>">Delete</a>
+                                        </div>
+                                    </td>
+                                    <td><?php echo $comment->body ;?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->
