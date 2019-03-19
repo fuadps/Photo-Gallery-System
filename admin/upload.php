@@ -41,12 +41,13 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Upload
-                        <small>Subheading</small>
+                        <small>Photo</small>
                     </h1>
                     <div class="col-md-6">
                         <form action="upload.php" method="post" enctype="multipart/form-data" >
                         
                         <div class="form-group">
+                            <label for="title">Title</label>
                             <input type="text" name="title" class="form-control"/>
                         </div>
 

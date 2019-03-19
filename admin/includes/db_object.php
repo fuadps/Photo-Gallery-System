@@ -121,6 +121,15 @@ class Db_object {
     public function save() {
         return isset($this->{static::$id_field}) ? $this->update() : $this->create();
     }
+
+    public static function count_all() {
+        global $database;
+
+        $sql = "SELECT COUNT(*) FROM ". static::$db_table;
+        $result_set = $database->query($sql);
+        $row = mysqli_fetch_row($result_set);
+        return array_shift($row);
+    }
 }
 
 ?>

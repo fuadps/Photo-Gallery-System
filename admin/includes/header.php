@@ -19,7 +19,7 @@ if (!$session->is_signed_in) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Photo Gallery Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,6 +38,8 @@ if (!$session->is_signed_in) {
     <![endif]-->
 
     <link href="css/styles.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 </head>
