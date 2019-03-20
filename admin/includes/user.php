@@ -84,6 +84,19 @@ class User extends Db_object {
         return unlink($target_path) ? true : false;
     }
 
+    public function ajax_save_image($user_image,$user_id) {
+        global $database;
+        $user_object = new self;
+
+        $user_image = $database->escape_string($user_image);
+        $user_id = $database->escape_string($user_id);
+
+        $user_object = self::find_by_id($user_id);
+        
+        $user_object->user_image = $user_image;
+        $user_object->save();
+    }
+
 }
 
 ?>

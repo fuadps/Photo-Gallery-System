@@ -23,6 +23,8 @@ $users = User::find_all();
 
         <div class="container-fluid">
 
+            <label for=""><?php echo $session->message; ?></label>
+
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
@@ -48,7 +50,7 @@ $users = User::find_all();
                                     <td><img src="<?php echo $user->image_path() ;?>" alt="" class="user_image"></td>
                                     <td><?php echo $user->username ;?>
                                         <div class="action_links">
-                                            <a href="delete_user.php?id=<?php echo $user->id ?>">Delete</a>
+                                            <a class="delete_links" href="delete_user.php?id=<?php echo $user->id ?>">Delete</a>
                                             <a href="edit_user.php?id=<?php echo $user->id ?>">Edit</a>
                                         </div>
                                     </td>
@@ -69,3 +71,4 @@ $users = User::find_all();
         <!-- /#page-wrapper -->
 
   <?php include("includes/footer.php"); ?>
+  

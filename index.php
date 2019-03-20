@@ -58,7 +58,7 @@ $photos = Photo::find_by_query($sql);
                     
                     for ($i=1; $i <= $pagination->page_total(); $i++) { 
                         if ($i == $pagination->current_page) {
-                            echo "<li class='active'><a class='active' href='?page={$i}'>{$i}</a></li>";
+                            echo "<li class='active'><a href='?page={$i}'>{$i}</a></li>";
                         }
                         else {
                             echo "<li><a href='?page={$i}'>{$i}</a></li>";
