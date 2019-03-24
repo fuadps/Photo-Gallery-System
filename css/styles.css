@@ -1,9 +1,17 @@
-.home_page_photo {
+/* .home_page_photo {
     width: 200px;
-    height: 150px !important;
-}
+    height: 200px !important;
+} */
 
 .pager .active a {
     background-color: cornflowerblue;
-    color: gold;
+    color: white;
+}
+
+.label-black {
+    color: black;
+  }
+
+  .modal-open {
+    padding-right: 0px !important;
 }
