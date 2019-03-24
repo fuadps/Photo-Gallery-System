@@ -3,11 +3,12 @@
 class Photo extends Db_object {
 
     protected static $db_table = "photos";
-    protected static $db_table_fields = array('photo_id','title','caption','alternate_text','description','filename','type','size');
+    protected static $db_table_fields = array('photo_id','id','title','caption','alternate_text','description','filename','type','size');
     protected static $id_field = "photo_id";
 
 
     public $photo_id;
+    public $id;
     public $title;
     public $caption;
     public $alternate_text;
@@ -34,7 +35,7 @@ class Photo extends Db_object {
         return $this->upload_directory .DS. $this->filename;
     }
 
-    public function set_files($file) {
+    public function set_files($file,$id = 0) {
         if (empty($file) || !$file || !is_array($file)) {
             $this->errors[] = "No file was uploaded";
             return false;
@@ -44,6 +45,7 @@ class Photo extends Db_object {
             return false;
         } 
         else {
+            $this->id = $id;
             $this->tmp_path = $file['tmp_name'];
             $this->filename = basename($file['name']);
             $this->type = $file['type'];
