@@ -1,11 +1,9 @@
 <?php include("includes/header.php"); ?>
 <?php 
 
-//$photos = Photo::find_all();
-
 $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
 $total_pages_count = Photo::count_all();
-$items_per_page = 4;
+$items_per_page = 6;
 
 $pagination = new Pagination($page,$items_per_page,$total_pages_count);
 
@@ -28,6 +26,7 @@ $photos = Photo::find_by_query($sql);
                             <a class="thumbnail" href="photo.php?id=<?php echo $photo->photo_id;?>">
                                 <img class="img-responsive home_page_photo" src="admin/<?php echo $photo->picture_path();?>" alt="">
                             </a>
+                            <p class="text-center"><?php echo !empty($photo->title) ? $photo->title : "No title";?></p>
                             
                         </div>
 
