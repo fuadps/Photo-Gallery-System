@@ -41,9 +41,10 @@ $comments = Comment::find_all();
                             </thead>
                             <tbody>
                             <?php foreach ($comments as $comment) : ?>
+                            <?php $user_info = User::find_by_id($comment->id); ?>
                                 <tr>
                                     <td><?php echo $comment->comment_id ;?></td>
-                                    <td><?php echo $comment->author ;?>
+                                    <td><?php echo $user_info->username ;?>
                                         <div class="action_links">
                                             <a class="delete_links" href="delete_comment.php?id=<?php echo $comment->comment_id ?>">Delete</a>
                                         </div>
