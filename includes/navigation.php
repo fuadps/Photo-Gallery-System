@@ -10,17 +10,26 @@
                 </button>
                 <a class="navbar-brand" href="index.php">Photo Gallery</a>
             </div>
+            <ul class="nav navbar-right top-nav">
+            <?php if ($session->is_signed_in()) : ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $session->username;?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+
+            <?php else : ?>
+                <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">Log In</button></li>
+            <?php endif; ?>
+            </ul>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="admin/">Admin</a>
+                        <a href="#" data-toggle="modal" data-target="#upload">Upload</a>
                     </li>
                 </ul>
             </div>
@@ -28,3 +37,4 @@
         </div>
         <!-- /.container -->
     </nav>
+            
