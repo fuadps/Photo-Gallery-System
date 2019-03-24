@@ -9,10 +9,10 @@ if (isset($_POST['submit'])) {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
-    $user_found = User::verify_user($username,$password);
+    $admin_found = Admin::verify_admin($username,$password);
 
-    if ($user_found) {
-        $session->login($user_found);
+    if ($admin_found) {
+        $session->login($admin_found);
         redirect("index.php");
     }
     else {
