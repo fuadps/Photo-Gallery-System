@@ -4,6 +4,7 @@ class Session {
     private $signed_in = false;
     public $user_id;
     public $username;
+    public $role_id;
     public $message;
     public $count;
 
@@ -22,11 +23,16 @@ class Session {
         return $this->signed_in;
     }
 
+    public function check_role($role_id) {
+        return $role_id == $this->role_id ? true : false;
+    }
+
     public function login($user) {
         if($user) {
             print_r($user);
             $this->user_id = $_SESSION['user_id'] = $user->id;
             $this->username = $_SESSION['username'] = $user->username;
+            $this->role_id = $_SESSION['role_id'] = $user->role_id;
             $this->signed_in = true;
         }
     }
@@ -36,6 +42,7 @@ class Session {
         unset($_SESSION['username']);
         unset($this->user_id);
         unset($this->username);
+        unset($this->role_id);
         $this->signed_in = false;
     }
 
@@ -43,11 +50,13 @@ class Session {
         if (isset($_SESSION['user_id'])) {
             $this->user_id = $_SESSION['user_id'];
             $this->username = $_SESSION['username'];
+            $this->role_id = $_SESSION['role_id'];
             $this->signed_in = true;
         }
         else {
             unset($this->user_id);
             unset($this->username);
+            unset($this->role_id);
             $this->signed_in = false;
         }
     }

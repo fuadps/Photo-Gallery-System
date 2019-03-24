@@ -3,7 +3,7 @@
 class User extends Db_object {
 
     protected static $db_table = "users";
-    protected static $db_table_fields = array('username','password','first_name','last_name','user_image');
+    protected static $db_table_fields = array('username','password','first_name','last_name','user_image','role_id');
     protected static $id_field = "id";
 
     public $id;
@@ -12,6 +12,7 @@ class User extends Db_object {
     public $first_name;
     public $last_name;
     public $user_image;
+    public $role_id;
     public $upload_directory = "images";
     public $placeholder_img = "http://placehold.it/400x400&text=image";
 
@@ -27,7 +28,6 @@ class User extends Db_object {
         $result_array = self::find_by_query($sql);
         
         return !empty($result_array) ? true : false;
-
     }
 
     public function image_path() {
@@ -40,7 +40,21 @@ class User extends Db_object {
         $username = $database->escape_string($username);
         $password = $database->escape_string($password);
 
-    $sql = "SELECT * FROM ". self::$db_table ." WHERE username = '{$username}' AND password = '{$password}' LIMIT 1";
+    $sql = "SELECT * FROM ". self::$db_table ." WHERE username = '{$username}' AND password = '{$password}' AND role_id = 1 LIMIT 1";
+
+    $result_array = self::find_by_query($sql);
+        
+    return !empty($result_array) ? array_shift($result_array) : false;
+
+    }
+
+    public static function verify_admin($username,$password) {
+        global $database;
+
+        $username = $database->escape_string($username);
+        $password = $database->escape_string($password);
+
+    $sql = "SELECT * FROM ". self::$db_table ." WHERE username = '{$username}' AND password = '{$password}' AND role_id = 2 LIMIT 1";
 
     $result_array = self::find_by_query($sql);
         

@@ -1,6 +1,6 @@
 <?php include("includes/init.php"); ?>
 
-<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
+<?php if (!$session->is_signed_in() || !$session->check_role(2)) {redirect("login.php");} ?>
 
 <?php  
 

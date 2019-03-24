@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
 
-<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
+<?php if (!$session->is_signed_in() || !$session->check_role(2)) {redirect("login.php");} ?>
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -16,6 +16,7 @@
 
         <div id="page-wrapper">
             <?php include("includes/admin_content.php");  ?>
+            <?php print_r($session);"<br>".print_r($_SESSION);echo !$session->check_role(2) ? "true" : "false"; echo !$session->is_signed_in() ? "true" : "false" ?>
         </div>
         <!-- /#page-wrapper -->
 

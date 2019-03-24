@@ -1,7 +1,7 @@
 <?php
 require_once('includes/header.php');
 
-if ($session->is_signed_in()) {
+if ($session->is_signed_in() && $session->check_role(2)) {
     redirect("index.php");
 }
 
@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
-    $admin_found = Admin::verify_admin($username,$password);
+    $admin_found = User::verify_admin($username,$password);
 
     if ($admin_found) {
         $session->login($admin_found);

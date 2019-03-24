@@ -31,6 +31,11 @@
                     <li>
                         <a href="#" data-toggle="modal" data-target="#upload">Upload</a>
                     </li>
+                    <?php if ($session->is_signed_in() && $session->check_role(2)) : ?>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#upload">Admin</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
