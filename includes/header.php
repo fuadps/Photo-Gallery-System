@@ -46,6 +46,9 @@
     <!--Upload Modal-->
     <?php include("upload_modal.php"); ?>
 
+    <!--Upload Modal-->
+    <?php include("edit_modal.php"); ?>
+
     <!-- Navigation -->
     <?php include("navigation.php");?>
 
