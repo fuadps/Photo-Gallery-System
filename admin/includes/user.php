@@ -17,6 +17,19 @@ class User extends Db_object {
 
     public $tmp_path;
 
+    public static function check_username($username) {
+        global $database;
+
+        $username = $database->escape_string($username);
+
+        $sql = "SELECT * FROM ". self::$db_table ." WHERE username = '{$username}' LIMIT 1";
+
+        $result_array = self::find_by_query($sql);
+        
+        return !empty($result_array) ? true : false;
+
+    }
+
     public function image_path() {
         return empty($this->user_image) ? $this->placeholder_img : $this->upload_directory.DS.$this->user_image;
     }
