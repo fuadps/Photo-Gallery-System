@@ -1,6 +1,6 @@
 <?php
 
-require_once("admin/includes/init.php");
+include("includes/header.php");
 
 if (empty($_GET['id'])) {
     redirect("index.php");
@@ -8,62 +8,25 @@ if (empty($_GET['id'])) {
 
 $photo = Photo::find_by_id($_GET['id']);
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['post_comment'])) {
     $comment = new Comment();
 
-    $comment->author = trim($_POST['author']);
     $comment->body = trim($_POST['body']);
 
-    $post_comment = Comment::create_comment($photo->photo_id,$comment->author,$comment->body);
+    $post_comment = Comment::create_comment($photo->photo_id,$session->user_id,$comment->body);
 
     if ($post_comment && $post_comment->save()) {
-        redirect("photo.php?id=".$photo->photo_id);
+        //redirect("photo.php?id=".$photo->photo_id);
     }
     else {
         $message = "It seems they are problem with posting comment.";
     }
 }
 
+$user = User::find_by_id($photo->id);
 $comments = Comment::find_the_comments($photo->photo_id);
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Blog Post - Start Bootstrap Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/blog-post.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <?php include("includes/navigation.php") ?>
-
-    <!-- Page Content -->
-    <div class="container">
-
         <div class="row">
 
             <!-- Blog Post Content Column -->
@@ -72,28 +35,27 @@ $comments = Comment::find_the_comments($photo->photo_id);
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1><?php echo isset($photo->title) ? "No title": $photo->title; ?></h1>
+                <h1><?php echo !empty($photo->title) ? $photo->title : "No title"; ?></h1>
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#">Anonymous</a>
+                    by <a href="#"><?php echo empty($photo->id) ? "Guest" : $user->username; ?></a>
                 </p>
 
                 <hr>
 
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
-
-                <hr>
-
                 <div class="text-center">
+                    <figure class="figure">
+
                     <!-- Preview Image -->
-                    <img src="admin/<?php echo $photo->picture_path(); ?>" alt="">            
+                    <img class="img-responsive" src="admin/<?php echo $photo->picture_path(); ?>" alt="<?php echo $photo->alternate_text; ?>"><br>
+                    <figcaption class="figure-caption text-center"><?php echo $photo->caption; ?></figcaption>
+                    </figure>
                 </div>
                 <hr>
 
                 <!-- Post Content -->
-                <p class="lead"><?php echo $photo->caption; ?></p>
+                <p class="lead"></p>
                 <p><?php echo $photo->description; ?></p>
                 <hr>
 
@@ -102,16 +64,20 @@ $comments = Comment::find_the_comments($photo->photo_id);
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
+
+                    <?php if(isset($session->user_id)) :  ?>
+
                     <form role="form" action="" method="post">
-                        <div class="form-group">
-                            <label for="author">Author</label>
-                            <input type="text" name="author" class ="form-control" />
-                        </div>
                         <div class="form-group">
                             <textarea name="body" class="form-control" rows="3"></textarea>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="post_comment" class="btn btn-primary">Submit</button>
                     </form>
+
+                    <?php else : ?>
+                        <p>Please <a>login</a> or <a>sign up</a> to comment in this photo.</p>
+                    <?php endif;?>
+
                 </div>
 
                 <hr>
@@ -119,20 +85,20 @@ $comments = Comment::find_the_comments($photo->photo_id);
                 <!-- Posted Comments -->
 
                 <?php foreach($comments as $comment) : ?>
+                <?php $user_info = User::find_by_id($comment->id); ?>
                 <!-- Comment -->
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        <img class="media-object user_image" src="admin/<?php echo $user_info->image_path(); ?>" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><?php echo $comment->author; ?>
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><?php echo $user_info->username; ?>
+                            <small><?php echo date("jS F Y \a\\t g:i a", strtotime($comment->date_post." ".$comment->time_post)); ?></small>
                         </h4>
                         <?php echo $comment->body; ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
-               
 
             </div>
 
@@ -145,7 +111,7 @@ $comments = Comment::find_the_comments($photo->photo_id);
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="text-center">Copyright &copy; Your Website 2019</p>
+                    <p class="text-center">Copyright &copy; fuadps 2019</p>
                 </div>
             </div>
             <!-- /.row -->
