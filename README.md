@@ -23,8 +23,26 @@ Users also have an opportunity to comment other photo.
 - Summernote
 
 # Installation
+1. Create a database name "gallery_db".
+2. Import the table using the provided file "gallery_db.sql".
+3. Drag and drop all files into your localhost directory or webserver
+4. Configure the "config.php" file (db servername, db username & password)
+5. Configure the "init.php" file (SITE_ROOT define path)
 
 # Screenshots
+
+![image](https://i.imgur.com/nQ0K6tT.png) <br>
+![image](https://i.imgur.com/mlu04ti.png) <br>
+![image](https://i.imgur.com/PFppqkl.png) <br>
+
+<details><summary>See More</summary>
+
+![image](https://i.imgur.com/gBTfMrG.png) <br>
+![image](https://i.imgur.com/X23eOId.png) <br>
+![image](https://i.imgur.com/LO7oENK.png) <br>
+![image](https://i.imgur.com/rf8e6Ud.png) <br>
+
+</details>
 
 # Notes
 This is my first web application using fully PHP object oriented programming (OOP) in a real practice. <br>
