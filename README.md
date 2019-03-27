@@ -6,7 +6,7 @@ Users also have an opportunity to comment other photo.
 - Login for admin and standard user.
 - Sign up page for who interested to join.
 - Upload photo and share it with others.
-- User who does not register can upload photo as a 'Anonymous' but cant comment other user photo.
+- User who does not register can upload photo as a 'Guest' but cant comment other user photo.
 - Comment other users photo (for register user only).
 - Manages all user, photo, and comment (for admin only).
 
