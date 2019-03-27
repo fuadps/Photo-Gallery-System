@@ -1,3 +1,4 @@
+<?php if ($session->is_signed_in()) : ?>
 <?php
 
 $user = User::find_by_id($session->user_id);
@@ -23,7 +24,7 @@ if (isset($_POST['update'])) {
 }
 
 ?>
-<?php if ($session->is_signed_in()) : ?>
+
 <div class="modal fade" tabindex="-1" role="dialog" id="edit_profile">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
