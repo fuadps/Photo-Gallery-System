@@ -33,7 +33,7 @@ Users also have an opportunity to comment other photo.
 
 ![image](https://i.imgur.com/nQ0K6tT.png) <br>
 ![image](https://i.imgur.com/mlu04ti.png) <br>
-![image](https://i.imgur.com/PFppqkl.png) <br>
+![image](https://i.imgur.com/PFppqkl.png) <br><br><br>
 
 <details><summary>See More</summary>
 
